@@ -120,6 +120,10 @@ class PlateGirderBridge:
         # Analyser — populated by setup_grillage()
         self.grillage_model: BridgeGrillageModel = BridgeGrillageModel()
 
+    @staticmethod
+    def module_name():
+        return "Plate Girder Bridge"
+
     def input_values(self) -> list:
         """Return UI field definitions for the InputDock (delegated to FrontendData)."""
         return self._frontend.input_values()

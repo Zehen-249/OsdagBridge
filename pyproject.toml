@@ -3,7 +3,7 @@ requires = ["setuptools>=61", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "osdagbridge"
+name = "osdagbridge-plugin"
 version = "1.0.0"
 description = "OsdagBridge - Shared core for analysis and design of steel bridges (CLI, Desktop, Web)"
 readme = "README.md"
@@ -74,7 +74,9 @@ osdagbridge-cli = "osdagbridge.cli.__main__:main"
 [project.gui-scripts]
 osdagbridge = "osdagbridge.desktop.__main__:main"
 
-
+# registering the plugin entry point for Osdag to discover and load
+[project.entry-points."osdag.plugins"]
+osdagbridge = "osdagbridge"
 
 
 
