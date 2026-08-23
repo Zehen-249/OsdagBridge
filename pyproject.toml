@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "osdagbridge"
-version = "1.0.0"
+version = "2.0.0"
 description = "OsdagBridge - Shared core for analysis and design of steel bridges (CLI, Desktop, Web)"
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -76,11 +76,12 @@ ospgrillage = [
 # setuptools config
 [tool.setuptools]
 package-dir = {"" = "src"}
-
-[tool.setuptools.packages.find]
-where = ["src"]
+packages = ["osdagbridge", "ospgrillage"]
 
 # Entry points
 [project.scripts]
 osdagbridge-cli = "osdagbridge.cli.__main__:main"
 osdagbridge = "osdagbridge.desktop.__main__:main"
+
+[project.entry-points."osdag.plugins"]
+OsdagBridge = "osdagbridge"

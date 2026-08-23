@@ -292,7 +292,7 @@ KEY_DD_SPACING_MAX      = "deck.report.spacing_max"     # max permissible bar sp
 KEY_DD_HAS_OVERHANG     = "deck.report.has_overhang"    # bool — overhang present
 
 # Module + section identifiers (also used as UI keys)
-KEY_MODULE_PLATE_GIRDER = "module.plate_girder"
+KEY_MODULE_PLATE_GIRDER = "osdagbridge.plate_girder"
 KEY_SECTION_STRUCTURE = "section.structure"
 KEY_SECTION_PROJECT      = "section.project"
 KEY_SECTION_GEOMETRIC = "section.geometry"
