@@ -3730,3 +3730,8 @@ class PlateGirderBridge:
         out[KEY_SD_WEB_TYPE] = str(
             inp.get(KEY_MP_GIRDER_WEB_TYPE) or "Thin Web with ITS"
         )
+
+    @staticmethod
+    def module_name() -> str:
+        """Return the module key of the current designer pipeline."""
+        return "plate_girder_bridge"
