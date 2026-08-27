@@ -1,4 +1,5 @@
 channel_sources:
+  - conda-forge
   - osdag
   - geompy
-  - conda-forge
+  - zehen-249
