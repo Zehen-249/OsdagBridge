@@ -8,7 +8,7 @@ META = {
     "name": "OsdagBridge",
     "description": "A bridge module for Osdag",
     "authors": ["FOSSEE Team"],
-    "version": "2.0.0",
+    "version": "1.0.0",
     "plugin_class": "osdagbridge.plugin.osdagbridge_plugin:OsdagBridgePlugin",
     "module_tree":[
         (
@@ -18,6 +18,5 @@ META = {
     "icons":[
         str(files("osdag_gui").joinpath("resources", "vectors", "nav_icons", "group_design.svg")),
         str(files("osdag_gui").joinpath("resources", "vectors", "nav_icons", "group_design_dark.svg"))
-    ],
-    "is_dev": True
+    ]
 }
