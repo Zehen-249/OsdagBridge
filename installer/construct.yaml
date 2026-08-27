@@ -21,7 +21,7 @@ channels:
 
 specs:
   - python >=3.11,<3.13
-  - osdagbridge
+  - osdagbridge=1.0.0
 
 # Files copied into the install prefix; used by the post-install scripts.
 extra_files:
