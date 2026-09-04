@@ -152,7 +152,7 @@ class TopViewCADWidget(QWidget):
         
         self.zoom_reset_btn = QPushButton(self)
         self.zoom_reset_btn.setFixedSize(25, 25)
-        self.zoom_reset_btn.setIcon(QIcon(":/vectors/fit_to_screen.svg"))
+        self.zoom_reset_btn.setIcon(QIcon(":/osdagbridge/vectors/fit_to_screen.svg"))
         self.zoom_reset_btn.setIconSize(QSize(25, 25))
         self.zoom_reset_btn.setToolTip("Fit to screen")
         self.zoom_reset_btn.setStyleSheet("""

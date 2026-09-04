@@ -15,7 +15,7 @@ class CustomTitleBar(QWidget):
 
         # Add Osdag logo icon to the title bar
         from PySide6.QtSvgWidgets import QSvgWidget
-        self.logo_label = QSvgWidget(":/vectors/Osdag_logo.svg", self)
+        self.logo_label = QSvgWidget(":/osdagbridge/vectors/Osdag_logo.svg", self)
         self.logo_label.setObjectName("LogoLabel")
         self.logo_label.setFixedSize(20, 20)
 

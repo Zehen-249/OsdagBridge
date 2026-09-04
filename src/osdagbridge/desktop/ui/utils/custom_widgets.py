@@ -537,10 +537,10 @@ class ToolBarWidget(QWidget):
 
         # ---- Buttons ----
         # Zoom group
-        self.btn_zoom_fit = create_button(":/vectors/tool_bar/zoom_fit_light.svg", "Zoom Fit")
-        self.btn_zoom_window = create_button(":/vectors/tool_bar/zoom_window_light.svg", "Zoom Window")
-        self.btn_zoom_in = create_button(":/vectors/tool_bar/zoom_in_light.svg", "Zoom In")
-        self.btn_zoom_out = create_button(":/vectors/tool_bar/zoom_out_light.svg", "Zoom Out")
+        self.btn_zoom_fit = create_button(":/osdagbridge/vectors/tool_bar/zoom_fit_light.svg", "Zoom Fit")
+        self.btn_zoom_window = create_button(":/osdagbridge/vectors/tool_bar/zoom_window_light.svg", "Zoom Window")
+        self.btn_zoom_in = create_button(":/osdagbridge/vectors/tool_bar/zoom_in_light.svg", "Zoom In")
+        self.btn_zoom_out = create_button(":/osdagbridge/vectors/tool_bar/zoom_out_light.svg", "Zoom Out")
         self.layout.addWidget(self.btn_zoom_fit)
         self.layout.addWidget(self.btn_zoom_window)
         self.layout.addWidget(self.btn_zoom_in)
@@ -549,8 +549,8 @@ class ToolBarWidget(QWidget):
         self.layout.addWidget(add_separator())  # after zoom
 
         # Navigation group
-        self.btn_pan = create_button(":/vectors/tool_bar/pan_light.svg", "Pan")
-        self.btn_rotate = create_button(":/vectors/tool_bar/rotate_light.svg", "Rotate")
+        self.btn_pan = create_button(":/osdagbridge/vectors/tool_bar/pan_light.svg", "Pan")
+        self.btn_rotate = create_button(":/osdagbridge/vectors/tool_bar/rotate_light.svg", "Rotate")
         self.btn_pan.setCheckable(True)
         self.btn_rotate.setCheckable(True)
         self.layout.addWidget(self.btn_pan)
@@ -559,11 +559,11 @@ class ToolBarWidget(QWidget):
         self.layout.addWidget(add_separator())  # after rotate
 
         # Node group
-        self.btn_show_node = create_button(":/vectors/tool_bar/node_light.svg", "Node")
+        self.btn_show_node = create_button(":/osdagbridge/vectors/tool_bar/node_light.svg", "Node")
         self.btn_show_node.setCheckable(True)
-        self.btn_show_node_number = create_button(":/vectors/tool_bar/Node_Number.svg", "Node Number")
+        self.btn_show_node_number = create_button(":/osdagbridge/vectors/tool_bar/Node_Number.svg", "Node Number")
         self.btn_show_node_number.setCheckable(True)
-        self.btn_show_element_number = create_button(":/vectors/tool_bar/Element_number.svg", "Element Number")
+        self.btn_show_element_number = create_button(":/osdagbridge/vectors/tool_bar/Element_number.svg", "Element Number")
         self.btn_show_element_number.setCheckable(True)
         self.layout.addWidget(self.btn_show_node)
         self.layout.addWidget(self.btn_show_node_number)
@@ -571,14 +571,14 @@ class ToolBarWidget(QWidget):
         self.layout.addWidget(add_separator())  # after element number
 
         # Model display group
-        self.layout.addWidget(create_button(":/vectors/tool_bar/grillage_view_light.svg", "Grillage View"))
+        self.layout.addWidget(create_button(":/osdagbridge/vectors/tool_bar/grillage_view_light.svg", "Grillage View"))
 
-        self.layout.addWidget(create_button(":/vectors/tool_bar/show_axis_light.svg", "Axis"))
-        self.layout.addWidget(create_button(":/vectors/tool_bar/legend_icon.svg", "Legends"))
-        self.layout.addWidget(create_button(":/vectors/tool_bar/show_grid_lines_light.svg", "Grid Lines"))
-        self.layout.addWidget(create_button(":/vectors/tool_bar/show_support_light.svg", "Supports"))
-        self.layout.addWidget(create_button(":/vectors/tool_bar/show_load_light.svg", "Loads"))
-        self.btn_show_girder_label = create_button(":/vectors/tool_bar/Girder_label.svg", "Girder Labels")
+        self.layout.addWidget(create_button(":/osdagbridge/vectors/tool_bar/show_axis_light.svg", "Axis"))
+        self.layout.addWidget(create_button(":/osdagbridge/vectors/tool_bar/legend_icon.svg", "Legends"))
+        self.layout.addWidget(create_button(":/osdagbridge/vectors/tool_bar/show_grid_lines_light.svg", "Grid Lines"))
+        self.layout.addWidget(create_button(":/osdagbridge/vectors/tool_bar/show_support_light.svg", "Supports"))
+        self.layout.addWidget(create_button(":/osdagbridge/vectors/tool_bar/show_load_light.svg", "Loads"))
+        self.btn_show_girder_label = create_button(":/osdagbridge/vectors/tool_bar/Girder_label.svg", "Girder Labels")
         self.btn_show_girder_label.setCheckable(True)
         self.layout.addWidget(self.btn_show_girder_label)
 
@@ -636,13 +636,13 @@ class ToolBarWidget(QWidget):
             }
 
             QDoubleSpinBox::up-arrow {
-                image: url(:/vectors/arrow_up_light.svg);
+                image: url(:/osdagbridge/vectors/arrow_up_light.svg);
                 width: 15px;
                 height: 15px;
             }
 
             QDoubleSpinBox::down-arrow {
-                image: url(:/vectors/arrow_down_light.svg);
+                image: url(:/osdagbridge/vectors/arrow_down_light.svg);
                 width: 15px;
                 height: 15px;
             }

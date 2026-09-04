@@ -62,7 +62,7 @@ class AnalysisProgressDialog(QDialog):
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, False)
 
         try:
-            self.setWindowIcon(QIcon(":/images/osdag_logo.png"))
+            self.setWindowIcon(QIcon(":/osdagbridge/images/osdag_logo.png"))
         except Exception:
             pass
 

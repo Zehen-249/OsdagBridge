@@ -22,7 +22,7 @@ class CustomMessageBox(QDialog):
         super().__init__()
         self.setWindowFlags(Qt.FramelessWindowHint)
         self.setAttribute(Qt.WA_StyledBackground, True)
-        self.setWindowIcon(QIcon(":/images/osdag_logo.png"))
+        self.setWindowIcon(QIcon(":/osdagbridge/images/osdag_logo.png"))
         self.setObjectName("CustomDialog")
 
         # Base stylesheet for the dialog
@@ -109,11 +109,11 @@ class CustomMessageBox(QDialog):
     def setIconForType(self, dialogType):
         # Use Qt's standard icons (replace with custom paths if needed)
         icon_map = {
-            MessageBoxType.Information: ":/vectors/msg_info.svg",
-            MessageBoxType.Warning: ":/vectors/msg_warning.svg",
-            MessageBoxType.Success: ":/vectors/msg_success.svg",
-            MessageBoxType.Critical: ":/vectors/msg_critical.svg",
-            MessageBoxType.About: ":/vectors/msg_about.svg"
+            MessageBoxType.Information: ":/osdagbridge/vectors/msg_info.svg",
+            MessageBoxType.Warning: ":/osdagbridge/vectors/msg_warning.svg",
+            MessageBoxType.Success: ":/osdagbridge/vectors/msg_success.svg",
+            MessageBoxType.Critical: ":/osdagbridge/vectors/msg_critical.svg",
+            MessageBoxType.About: ":/osdagbridge/vectors/msg_about.svg"
         }
         icon_path = icon_map.get(dialogType, icon_map[MessageBoxType.Information])
         self.iconLabel.setPixmap(QIcon(icon_path).pixmap(32, 32))
