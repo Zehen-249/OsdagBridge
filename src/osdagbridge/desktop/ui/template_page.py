@@ -242,7 +242,7 @@ class CustomWindow(QWidget):
         # Cross-section view control
         self.cross_section_control = ClickableSvgWidget()
         self.cross_section_control.setFixedSize(18, 18)
-        self.cross_section_control.load(":/vectors/view_btn/cross_section_active.svg")
+        self.cross_section_control.load(":/osdagbridge/vectors/view_btn/cross_section_active.svg")
         self.cross_section_control.setToolTip("Toggle Cross-Section View")
         self.cross_section_control.clicked.connect(self.cross_section_toggle)
         self.cross_section_active = True
@@ -251,7 +251,7 @@ class CustomWindow(QWidget):
         # Top view control
         self.top_view_control = ClickableSvgWidget()
         self.top_view_control.setFixedSize(18, 18)
-        self.top_view_control.load(":/vectors/view_btn/top_view_active.svg")
+        self.top_view_control.load(":/osdagbridge/vectors/view_btn/top_view_active.svg")
         self.top_view_control.setToolTip("Toggle Top View")
         self.top_view_control.clicked.connect(self.top_view_toggle)
         self.top_view_active = True
@@ -259,7 +259,7 @@ class CustomWindow(QWidget):
 
         # Logs Dock Control
         self.log_dock_control = ClickableSvgWidget()
-        self.log_dock_control.load(":/vectors/view_btn/logs_dock_inactive.svg")
+        self.log_dock_control.load(":/osdagbridge/vectors/view_btn/logs_dock_inactive.svg")
         self.log_dock_control.setFixedSize(18, 18)
         self.log_dock_control.setToolTip("Toggle Logs Dock")
         self.log_dock_control.clicked.connect(self.logs_dock_toggle)
@@ -268,7 +268,7 @@ class CustomWindow(QWidget):
 
         # 3D Cad Control
         self.cad_3d_control = ClickableSvgWidget()
-        self.cad_3d_control.load(":/vectors/view_btn/3d_cad_inactive.svg")
+        self.cad_3d_control.load(":/osdagbridge/vectors/view_btn/3d_cad_inactive.svg")
         self.cad_3d_control.setFixedSize(18, 18)
         self.cad_3d_control.setToolTip("Toggle 3D CAD View")
         self.cad_3d_control.clicked.connect(self.cad_3d_view_toggle)
@@ -277,7 +277,7 @@ class CustomWindow(QWidget):
 
         # Plots Control
         self.plots_control = ClickableSvgWidget()
-        self.plots_control.load(":/vectors/view_btn/plots_inactive.svg")
+        self.plots_control.load(":/osdagbridge/vectors/view_btn/plots_inactive.svg")
         self.plots_control.setFixedSize(18, 18)
         self.plots_control.setToolTip("Toggle 3D Plots View")
         self.plots_control.clicked.connect(self.plots_view_toggle)
@@ -287,14 +287,14 @@ class CustomWindow(QWidget):
         # Input Dock
         self.input_dock_control = ClickableSvgWidget()
         self.input_dock_control.setFixedSize(18, 18)
-        self.input_dock_control.load(":/vectors/view_btn/input_dock_active.svg")
+        self.input_dock_control.load(":/osdagbridge/vectors/view_btn/input_dock_active.svg")
         self.input_dock_control.setToolTip("Toggle Input Dock")
         self.input_dock_control.clicked.connect(self.input_dock_toggle)
         self.input_dock_active = True
         control_button_layout.addWidget(self.input_dock_control)
 
         self.output_dock_control = ClickableSvgWidget()
-        self.output_dock_control.load(":/vectors/view_btn/output_dock_inactive.svg")
+        self.output_dock_control.load(":/osdagbridge/vectors/view_btn/output_dock_inactive.svg")
         self.output_dock_control.setFixedSize(18, 18)
         self.output_dock_control.setToolTip("Toggle Output Dock")
         self.output_dock_control.clicked.connect(self.output_dock_toggle)
@@ -936,16 +936,16 @@ class CustomWindow(QWidget):
         if self.cad_3d_view_active or self.plots_view_active:
             # Deactivate 3D CAD & update icon
             self.cad_3d_view_active = False
-            self.cad_3d_control.load(":/vectors/view_btn/3d_cad_inactive.svg")
+            self.cad_3d_control.load(":/osdagbridge/vectors/view_btn/3d_cad_inactive.svg")
             # Deactivate Plots & update icon
             self.plots_view_active = False
-            self.plots_control.load(":/vectors/view_btn/plots_inactive.svg")
+            self.plots_control.load(":/osdagbridge/vectors/view_btn/plots_inactive.svg")
             # Restore Cross Section as active & update icon
             self.cross_section_active = True
-            self.cross_section_control.load(":/vectors/view_btn/cross_section_active.svg")
+            self.cross_section_control.load(":/osdagbridge/vectors/view_btn/cross_section_active.svg")
             # Restore Top View as active & update icon
             self.top_view_active = True
-            self.top_view_control.load(":/vectors/view_btn/top_view_active.svg")
+            self.top_view_control.load(":/osdagbridge/vectors/view_btn/top_view_active.svg")
             # Switch central area back to dual view widget
             self._set_central_view('dual')
             # Explicitly show both sub-views inside BridgeDualCADWidget
@@ -957,9 +957,9 @@ class CustomWindow(QWidget):
         # Normal toggle within dual view
         self.cross_section_active = not self.cross_section_active
         if self.cross_section_active:
-            self.cross_section_control.load(":/vectors/view_btn/cross_section_active.svg")
+            self.cross_section_control.load(":/osdagbridge/vectors/view_btn/cross_section_active.svg")
         else:
-            self.cross_section_control.load(":/vectors/view_btn/cross_section_inactive.svg")
+            self.cross_section_control.load(":/osdagbridge/vectors/view_btn/cross_section_inactive.svg")
         self.cad_comp_widget.set_cross_section_visible(self.cross_section_active)
 
 
@@ -968,16 +968,16 @@ class CustomWindow(QWidget):
         if self.cad_3d_view_active or self.plots_view_active:
             # Deactivate 3D CAD & update icon
             self.cad_3d_view_active = False
-            self.cad_3d_control.load(":/vectors/view_btn/3d_cad_inactive.svg")
+            self.cad_3d_control.load(":/osdagbridge/vectors/view_btn/3d_cad_inactive.svg")
             # Deactivate Plots & update icon
             self.plots_view_active = False
-            self.plots_control.load(":/vectors/view_btn/plots_inactive.svg")
+            self.plots_control.load(":/osdagbridge/vectors/view_btn/plots_inactive.svg")
             # Restore Top View as active & update icon
             self.top_view_active = True
-            self.top_view_control.load(":/vectors/view_btn/top_view_active.svg")
+            self.top_view_control.load(":/osdagbridge/vectors/view_btn/top_view_active.svg")
             # Restore Cross Section as active & update icon
             self.cross_section_active = True
-            self.cross_section_control.load(":/vectors/view_btn/cross_section_active.svg")
+            self.cross_section_control.load(":/osdagbridge/vectors/view_btn/cross_section_active.svg")
             # Switch central area back to dual view widget
             self._set_central_view('dual')
             # Explicitly show both sub-views inside BridgeDualCADWidget
@@ -989,9 +989,9 @@ class CustomWindow(QWidget):
         # Normal toggle within dual view
         self.top_view_active = not self.top_view_active
         if self.top_view_active:
-            self.top_view_control.load(":/vectors/view_btn/top_view_active.svg")
+            self.top_view_control.load(":/osdagbridge/vectors/view_btn/top_view_active.svg")
         else:
-            self.top_view_control.load(":/vectors/view_btn/top_view_inactive.svg")
+            self.top_view_control.load(":/osdagbridge/vectors/view_btn/top_view_inactive.svg")
         self.cad_comp_widget.set_top_view_visible(self.top_view_active)
 
 
@@ -1004,24 +1004,24 @@ class CustomWindow(QWidget):
         if self.cad_3d_view_active or force_show:
             # 3D CAD is mutually exclusive — deactivate Plots & update icon
             self.plots_view_active = False
-            self.plots_control.load(":/vectors/view_btn/plots_inactive.svg")
+            self.plots_control.load(":/osdagbridge/vectors/view_btn/plots_inactive.svg")
             # Hide dual sub-views & update icons
             self.cross_section_active = False
-            self.cross_section_control.load(":/vectors/view_btn/cross_section_inactive.svg")
+            self.cross_section_control.load(":/osdagbridge/vectors/view_btn/cross_section_inactive.svg")
             self.top_view_active = False
-            self.top_view_control.load(":/vectors/view_btn/top_view_inactive.svg")
+            self.top_view_control.load(":/osdagbridge/vectors/view_btn/top_view_inactive.svg")
             # Mark 3D CAD as active & update icon
-            self.cad_3d_control.load(":/vectors/view_btn/3d_cad_active.svg")
+            self.cad_3d_control.load(":/osdagbridge/vectors/view_btn/3d_cad_active.svg")
             # Switch central area to 3D CAD widget
             self._set_central_view('3d')
         else:
             # 3D CAD turned off — mark inactive & update icon
-            self.cad_3d_control.load(":/vectors/view_btn/3d_cad_inactive.svg")
+            self.cad_3d_control.load(":/osdagbridge/vectors/view_btn/3d_cad_inactive.svg")
             # Restore dual view button states & update icons
             self.cross_section_active = True
             self.top_view_active = True
-            self.cross_section_control.load(":/vectors/view_btn/cross_section_active.svg")
-            self.top_view_control.load(":/vectors/view_btn/top_view_active.svg")
+            self.cross_section_control.load(":/osdagbridge/vectors/view_btn/cross_section_active.svg")
+            self.top_view_control.load(":/osdagbridge/vectors/view_btn/top_view_active.svg")
             # Switch central area back to dual view widget
             # widget has a real height when splitter sizes are calculated
             self._set_central_view('dual')
@@ -1036,24 +1036,24 @@ class CustomWindow(QWidget):
         if self.plots_view_active:
             # Plots is mutually exclusive — deactivate 3D CAD & update icon
             self.cad_3d_view_active = False
-            self.cad_3d_control.load(":/vectors/view_btn/3d_cad_inactive.svg")
+            self.cad_3d_control.load(":/osdagbridge/vectors/view_btn/3d_cad_inactive.svg")
             # Hide dual sub-views & update icons
             self.cross_section_active = False
-            self.cross_section_control.load(":/vectors/view_btn/cross_section_inactive.svg")
+            self.cross_section_control.load(":/osdagbridge/vectors/view_btn/cross_section_inactive.svg")
             self.top_view_active = False
-            self.top_view_control.load(":/vectors/view_btn/top_view_inactive.svg")
+            self.top_view_control.load(":/osdagbridge/vectors/view_btn/top_view_inactive.svg")
             # Mark Plots as active & update icon
-            self.plots_control.load(":/vectors/view_btn/plots_active.svg")
+            self.plots_control.load(":/osdagbridge/vectors/view_btn/plots_active.svg")
             # Switch central area to Plots widget
             self._set_central_view('plots')
         else:
             # Plots turned off — mark inactive & update icon
-            self.plots_control.load(":/vectors/view_btn/plots_inactive.svg")
+            self.plots_control.load(":/osdagbridge/vectors/view_btn/plots_inactive.svg")
             # Restore dual view button states & update icons
             self.cross_section_active = True
             self.top_view_active = True
-            self.cross_section_control.load(":/vectors/view_btn/cross_section_active.svg")
-            self.top_view_control.load(":/vectors/view_btn/top_view_active.svg")
+            self.cross_section_control.load(":/osdagbridge/vectors/view_btn/cross_section_active.svg")
+            self.top_view_control.load(":/osdagbridge/vectors/view_btn/top_view_active.svg")
             # Switch central area back to dual view widget
             # widget has a real height when splitter sizes are calculated
             self._set_central_view('dual')
@@ -1077,10 +1077,10 @@ class CustomWindow(QWidget):
         # Show/hide log dock & update icon
         if self.log_dock_active:
             self.logs_dock.show()
-            self.log_dock_control.load(":/vectors/view_btn/logs_dock_active.svg")
+            self.log_dock_control.load(":/osdagbridge/vectors/view_btn/logs_dock_active.svg")
         else:
             self.logs_dock.hide()
-            self.log_dock_control.load(":/vectors/view_btn/logs_dock_inactive.svg")
+            self.log_dock_control.load(":/osdagbridge/vectors/view_btn/logs_dock_inactive.svg")
 
     # Helper function to show and hide the 3D CAD | Plots | 2D CAD widgets
     def _set_central_view(self, view: str):
@@ -1140,18 +1140,18 @@ class CustomWindow(QWidget):
             # Update and save control state
             self.input_dock_active = input_is_active
             if self.input_dock_active:
-                self.input_dock_control.load(":/vectors/view_btn/input_dock_active.svg")
+                self.input_dock_control.load(":/osdagbridge/vectors/view_btn/input_dock_active.svg")
             else:
-                self.input_dock_control.load(":/vectors/view_btn/input_dock_inactive.svg")
+                self.input_dock_control.load(":/osdagbridge/vectors/view_btn/input_dock_inactive.svg")
                         
         # Update output dock icon
         if(output_is_active is not None):
             # Update and save control state
             self.output_dock_active = output_is_active
             if self.output_dock_active:
-                self.output_dock_control.load(":/vectors/view_btn/output_dock_active.svg")
+                self.output_dock_control.load(":/osdagbridge/vectors/view_btn/output_dock_active.svg")
             else:
-                self.output_dock_control.load(":/vectors/view_btn/output_dock_inactive.svg")
+                self.output_dock_control.load(":/osdagbridge/vectors/view_btn/output_dock_inactive.svg")
 
         # Update log dock icon
         if(log_is_active is not None):
@@ -1159,9 +1159,9 @@ class CustomWindow(QWidget):
             # Update and save control state
             self.logs_dock_active = log_is_active
             if self.log_dock_active:
-                self.log_dock_control.load(":/vectors/view_btn/logs_dock_active.svg")
+                self.log_dock_control.load(":/osdagbridge/vectors/view_btn/logs_dock_active.svg")
             else:
-                self.log_dock_control.load(":/vectors/view_btn/logs_dock_inactive.svg")
+                self.log_dock_control.load(":/osdagbridge/vectors/view_btn/logs_dock_inactive.svg")
 
     def toggle_animate(self, show: bool, dock: str = 'output', on_finished=None):
         sizes = self.splitter.sizes()
@@ -1929,7 +1929,7 @@ class InputDockIndicator(QWidget):
         input_layout.setContentsMargins(6,0,0,0)
         input_layout.setSpacing(0)
 
-        self.input_label = QSvgWidget(":/vectors/inputs_label_light.svg")
+        self.input_label = QSvgWidget(":/osdagbridge/vectors/inputs_label_light.svg")
         input_layout.addWidget(self.input_label)
         self.input_label.setFixedWidth(32)
 
@@ -2012,7 +2012,7 @@ class OutputDockIndicator(QWidget):
         toggle_layout.addStretch()
         output_layout.addWidget(self.toggle_strip)
 
-        self.output_label = QSvgWidget(":/vectors/outputs_label_light.svg")
+        self.output_label = QSvgWidget(":/osdagbridge/vectors/outputs_label_light.svg")
         output_layout.addWidget(self.output_label)
         self.output_label.setFixedWidth(28)
 

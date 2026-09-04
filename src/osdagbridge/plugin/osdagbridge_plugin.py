@@ -13,6 +13,7 @@ from osdagbridge import META
 from osdagbridge.core.bridge_types.plate_girder.plategirderbridge import PlateGirderBridge
 from osdagbridge.core.utils.common import KEY_MODULE_PLATE_GIRDER
 from osdagbridge.desktop.ui.template_page import CustomWindow
+from osdagbridge.desktop.__main__ import load_stylesheet
 
 class OsdagBridgePlugin(WidgetPlugin):
     def __init__(self):
@@ -45,6 +46,11 @@ class OsdagBridgePlugin(WidgetPlugin):
         
         # Connect Import XLSX
         # template_page.importSection.connect(self.main_window.import_section)
+
+        # Load and apply the global stylesheet
+        stylesheet = load_stylesheet()
+        if stylesheet:
+            template_page.setStyleSheet(stylesheet)
 
         template_page.setWindowFlags(Qt.Widget)
         template_page.setAttribute(Qt.WA_DontCreateNativeAncestors, True)

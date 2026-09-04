@@ -105,13 +105,13 @@ def get_combobox_style():
             border-left: 0px;
         }
         QComboBox::down-arrow{
-            image: url(:/vectors/arrow_down_light.svg);
+            image: url(:/osdagbridge/vectors/arrow_down_light.svg);
             width: 20px;
             height: 20px;
             margin-right: 8px;
         }
         QComboBox::down-arrow:on {
-            image: url(:/vectors/arrow_up_light.svg);
+            image: url(:/osdagbridge/vectors/arrow_up_light.svg);
             width: 20px;
             height: 20px;
             margin-right: 8px;

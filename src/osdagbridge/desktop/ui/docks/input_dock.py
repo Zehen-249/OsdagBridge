@@ -233,12 +233,12 @@ class InputDock(QWidget):
         btn_layout.setContentsMargins(0, 15, 0, 0)
         btn_layout.setSpacing(10)
 
-        self.save_input_btn = DockCustomButton("Save Input", ":/vectors/save.svg")
+        self.save_input_btn = DockCustomButton("Save Input", ":/osdagbridge/vectors/save.svg")
         self.save_input_btn.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         self.save_input_btn.clicked.connect(lambda: self.parent.common_design_func("Save"))
         btn_layout.addWidget(self.save_input_btn)
 
-        self.design_btn = DockCustomButton("Design", ":/vectors/design.svg")
+        self.design_btn = DockCustomButton("Design", ":/osdagbridge/vectors/design.svg")
         self.design_btn.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         self.design_btn.clicked.connect(lambda _, trigger="Design": self.parent.common_design_func(trigger))
         btn_layout.addWidget(self.design_btn)
@@ -548,7 +548,7 @@ class InputDock(QWidget):
             info = QToolButton()
             info.setCursor(pointing_hand_cursor())
             info.setAutoRaise(True)
-            info.setIcon(QIcon(":/vectors/msg_about.svg"))
+            info.setIcon(QIcon(":/osdagbridge/vectors/msg_about.svg"))
             info.setFixedSize(20, 20)
             info.setToolTip("View material properties")
             info.setStyleSheet("QToolButton { border:none; padding:0px; background:transparent; }")
@@ -586,7 +586,7 @@ class InputDock(QWidget):
         toggle.setCursor(pointing_hand_cursor())
         toggle.setCheckable(True)
         toggle.setChecked(True)
-        toggle.setIcon(QIcon(":/vectors/arrow_up_light.svg"))
+        toggle.setIcon(QIcon(":/osdagbridge/vectors/arrow_up_light.svg"))
         toggle.setIconSize(QSize(20, 20))
         toggle.setStyleSheet(
             "QPushButton { background:transparent; border:none; padding:2px; }"
@@ -604,7 +604,7 @@ class InputDock(QWidget):
 
         toggle.toggled.connect(lambda checked: (
             body.setVisible(checked),
-            toggle.setIcon(QIcon(":/vectors/arrow_up_light.svg" if checked else ":/vectors/arrow_down_light.svg")),
+            toggle.setIcon(QIcon(":/osdagbridge/vectors/arrow_up_light.svg" if checked else ":/osdagbridge/vectors/arrow_down_light.svg")),
         ))
 
         outer.setLayout(ol)
@@ -894,7 +894,7 @@ class InputDock(QWidget):
     def _sync_lock_icon(self):
         if self.lock_btn:
             self.lock_btn.setIcon(QIcon(
-                ":/vectors/lock_close.svg" if self.is_locked else ":/vectors/lock_open.svg"
+                ":/osdagbridge/vectors/lock_close.svg" if self.is_locked else ":/osdagbridge/vectors/lock_open.svg"
             ))
 
     def show_lock_tooltip(self):

@@ -132,7 +132,7 @@ class FrontendData:
                     "required":      True,
                     "post_row": {
                         "kind": "info_row",
-                        "icon": ":/vectors/location_pin.svg",
+                        "icon": ":/osdagbridge/vectors/location_pin.svg",
                     },
                 }),
 

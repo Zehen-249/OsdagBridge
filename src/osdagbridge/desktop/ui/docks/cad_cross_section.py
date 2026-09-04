@@ -174,7 +174,7 @@ class CrossSectionCADWidget(QWidget):
         
         self.fit_to_screen_btn = QPushButton(self)
         self.fit_to_screen_btn.setFixedSize(25, 25)
-        self.fit_to_screen_btn.setIcon(QIcon(":/vectors/fit_to_screen.svg"))
+        self.fit_to_screen_btn.setIcon(QIcon(":/osdagbridge/vectors/fit_to_screen.svg"))
         self.fit_to_screen_btn.setIconSize(QSize(25, 25))
         self.fit_to_screen_btn.setToolTip("Fit to screen")
         self.fit_to_screen_btn.setStyleSheet("""

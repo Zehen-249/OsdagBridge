@@ -5,7 +5,7 @@
 
 
 <RCC>
-    <qresource prefix="/">
+    <qresource prefix="/osdagbridge">
         <file>vectors/arrow_down_light.svg</file>
         <file>vectors/arrow_down_dark.svg</file>
         <file>vectors/arrow_up_light.svg</file>

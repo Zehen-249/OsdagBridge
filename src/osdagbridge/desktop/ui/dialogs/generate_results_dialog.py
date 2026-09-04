@@ -79,7 +79,7 @@ def apply_field_style(widget):
                 border-left: 0px;
             }
             QComboBox::down-arrow{
-                image: url(:/vectors/arrow_down_light.svg);
+                image: url(:/osdagbridge/vectors/arrow_down_light.svg);
                 width: 20px;
                 height: 20px;
                 margin-right: 8px;
