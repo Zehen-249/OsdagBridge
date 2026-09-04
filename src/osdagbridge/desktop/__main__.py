@@ -257,7 +257,7 @@ from osdagbridge.core.bridge_types.plate_girder.plategirderbridge import PlateGi
 
 def load_stylesheet():
     """Load the global QSS stylesheet from resources."""
-    file = QFile(":/themes/lightstyle.qss")
+    file = QFile(":/osdagbridge/themes/lightstyle.qss")
     if file.open(QFile.ReadOnly | QFile.Text):
         stream = QTextStream(file)
         stylesheet = stream.readAll()

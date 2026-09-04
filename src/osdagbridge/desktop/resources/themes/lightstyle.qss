@@ -44,7 +44,7 @@ QCheckBox::indicator:hover {
 QCheckBox::indicator:checked {
     background-color: #ffffff;
     border: 1px solid #333333;
-    image: url(:/vectors/checked.svg);
+    image: url(:/osdagbridge/vectors/checked.svg);
 }
 
 QMenuBar#template_page_menu_bar {

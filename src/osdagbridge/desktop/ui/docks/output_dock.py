@@ -187,12 +187,12 @@ class OutputDock(QWidget):
         btn_layout.setContentsMargins(0, 15, 0, 0)
         btn_layout.setSpacing(10)
 
-        results_btn = DockCustomButton("Generate Results Table", ":/vectors/design_result_table.svg")
+        results_btn = DockCustomButton("Generate Results Table", ":/osdagbridge/vectors/design_result_table.svg")
         results_btn.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         results_btn.clicked.connect(self.open_generate_results_dialog)
         btn_layout.addWidget(results_btn)
 
-        self.report_btn = DockCustomButton("Generate Report", ":/vectors/design_report.svg")
+        self.report_btn = DockCustomButton("Generate Report", ":/osdagbridge/vectors/design_report.svg")
         self.report_btn.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         self.report_btn.clicked.connect(self._on_report_clicked)
         btn_layout.addWidget(self.report_btn)
@@ -344,7 +344,7 @@ class OutputDock(QWidget):
         toggle.setCursor(pointing_hand_cursor())
         toggle.setCheckable(True)
         toggle.setChecked(True)
-        toggle.setIcon(QIcon(":/vectors/arrow_up_light.svg"))
+        toggle.setIcon(QIcon(":/osdagbridge/vectors/arrow_up_light.svg"))
         toggle.setIconSize(QSize(20, 20))
         toggle.setStyleSheet(
             "QPushButton { background:transparent; border:none; padding:2px; }"
@@ -363,8 +363,8 @@ class OutputDock(QWidget):
         toggle.toggled.connect(lambda checked: (
             body.setVisible(checked),
             toggle.setIcon(QIcon(
-                ":/vectors/arrow_up_light.svg" if checked
-                else ":/vectors/arrow_down_light.svg"
+                ":/osdagbridge/vectors/arrow_up_light.svg" if checked
+                else ":/osdagbridge/vectors/arrow_down_light.svg"
             )),
         ))
 
