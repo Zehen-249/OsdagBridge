@@ -384,6 +384,17 @@ class PlateGirderBridge:
         # When True, design() writes tools/bridge_full_data.json. Off by default.
         self.dump_json: bool = False
 
+    @property
+    def design_status(self) -> bool:
+        """Whether a design has been successfully run.
+
+        Delegates to the underlying ``FrontendData`` so callers (the
+        save-prompt hook in ``desktop/__main__.py``, the ``saveDesign`` method
+        in ``CustomWindow``, etc.) can read ``backend.design_status`` without
+        reaching into ``backend._frontend``.
+        """
+        return bool(getattr(self._frontend, "design_status", False))
+
     def input_values(self) -> list:
         """Return UI field definitions for the InputDock (delegated to FrontendData)."""
         return self._frontend.input_values()
@@ -844,6 +855,14 @@ class PlateGirderBridge:
             log_memory("design: COMPLETE")
             bridge_logger.design_completed(is_safe)
 
+            # Flip design_status on the underlying FrontendData so the
+            # standalone close-prompt filter (and any other reader of
+            # ``backend.design_status``) knows a design has been run in this
+            # session. Without this, the close-prompt falls through to the
+            # "Save OSI Only" branch because FrontendData.__init__ sets the
+            # flag to False and nothing in the design pipeline ever flips it.
+            self._frontend.design_status = True
+
         except Exception as e:
             bridge_logger.analysis_failed(str(e))
             raise
@@ -851,6 +870,11 @@ class PlateGirderBridge:
     def reset(self) -> None:
         # Release all heavy analysis memory (unlock / app-close entry point).
         self.memory.release()
+        # design_status reflects "a design has been run in this session". When
+        # the user unlocks the dock to start a new design, this no longer
+        # applies; reset it so the close-prompt doesn't offer to save a
+        # project based on stale state.
+        self._frontend.design_status = False
 
     def _export_cad_figures(self, cad_generator) -> dict:
         """
