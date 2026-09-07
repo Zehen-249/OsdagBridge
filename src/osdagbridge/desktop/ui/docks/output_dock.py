@@ -41,6 +41,7 @@ from osdagbridge.core.utils.common import (
     KEY_OUTPUT_DOCK_MEMBER_ID, KEY_OUTPUT_DOCK_LOAD_COMBINATION,
     KEY_TS_NO_OF_GIRDERS,
 )
+from osdagbridge.core.utils.project_db import insert_recent_project
 from osdagbridge.desktop.ui.utils.custom_buttons import DockCustomButton
 from osdagbridge.desktop.ui.docks.dock_utils import apply_field_style
 from osdagbridge.desktop.ui.utils.custom_widgets import RichCheckBox, PercentBarWidget, CustomRadioButton
@@ -947,6 +948,10 @@ class OutputDock(QWidget):
         output_dict = dict(getattr(self.backend, 'output_dict'))
         dlg = GenerateResultsDialog(parent=None, output_dict=output_dict)
         dlg.exec()
+
+    def save_to_database(self, record: dict) -> int | None:
+        """Insert or update a project record in the recent_projects table."""
+        return insert_recent_project(record)
 
 
 
