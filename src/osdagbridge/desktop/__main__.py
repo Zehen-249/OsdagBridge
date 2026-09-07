@@ -8,6 +8,7 @@ try:
 except Exception:
     pass
 
+from PySide6.QtCore import QObject, QEvent
 
 def _register_conda_dll_directories():
     """Add the active conda environment's native DLL folders to the Windows DLL
@@ -288,6 +289,56 @@ def main():
         window.setWindowIcon(icon)
     window.showMaximized()
     window.show()
+    
+    # Why an event filter instead of QApplication.aboutToQuit: a modal file
+    # dialog opened from inside aboutToQuit fails to attach to the (already
+    # being-destroyed) main window and the user sees a dialog flash and
+    # dismiss. Filtering QCloseEvent lets us prompt while the window is fully
+    # alive, with three choices:
+    #   Yes   → saveDesign() runs, then accept the close
+    #   No    → accept the close (discard work, app quits)
+    #   Cancel→ ignore the close (window stays open)
+    _quit_dialog_done = {"value": False}  # set True once we've handled the prompt
+
+    class _ClosePromptFilter(QObject):
+        def eventFilter(self, obj, event):
+            if obj is window and event.type() == QEvent.Type.Close:
+                if _quit_dialog_done["value"]:
+                    return False  # already handled; let the close proceed
+                try:
+                    from osdagbridge.desktop.ui.dialogs.custom_messagebox import (
+                        CustomMessageBox, MessageBoxType,
+                    )
+                except Exception:
+                    return False  # can't prompt → just let it close
+                try:
+                    result = CustomMessageBox(
+                        title="Save Design",
+                        text="Do you want to save your design before exiting?",
+                        buttons=["Yes", "No", "Cancel"],
+                        dialogType=MessageBoxType.Warning,
+                    ).exec()
+                except Exception:
+                    return False  # dialog errored → let close proceed
+
+                if result == "Cancel":
+                    # Block the close — window stays open
+                    event.ignore()
+                    return True
+                if result == "Yes":
+                    try:
+                        window.saveDesign()
+                    except Exception:
+                        # Don't block the close on a save error.
+                        pass
+                # Yes or No: let the close happen
+                _quit_dialog_done["value"] = True
+                event.accept()
+                return False  # don't consume; let Qt finish the close
+            return False
+
+    close_filter = _ClosePromptFilter(window)
+    window.installEventFilter(close_filter)
 
     # Execute the event loop
     sys.exit(app.exec())
