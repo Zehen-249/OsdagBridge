@@ -1093,6 +1093,31 @@ class InputDock(QWidget):
         self.is_require_field_changed = True
         self.input_value_changed.emit()
 
+        # ── info_row buttons (e.g. Project Location) ──────────────────────
+        # The main loop above only sets QLineEdit / QComboBox values. A field
+        # like KEY_PROJECT_LOCATION is rendered as a button that opens a
+        # dialog, with the chosen location displayed on a hidden QLabel
+        # named "{key}_info_label" inside a row named "{key}_info_row".
+        # Walk every such label, and if the corresponding key in *data* is
+        # a dict (the shape ProjectLocationDialog.get_selected_location()
+        # returns), restore the label text and row visibility. Without this
+        # pass, the input_dict is correct but the UI shows "Location not
+        # selected" after a load.
+        for lbl in self.input_widget.findChildren(QLabel):
+            name = lbl.objectName()
+            if not name or not name.endswith("_info_label"):
+                continue
+            key = name[: -len("_info_label")]
+            value = data.get(key)
+            if not isinstance(value, dict):
+                continue
+            display_text = str(value.get("display_text", "") or "")
+            show_display = bool(value.get("show_display", False))
+            lbl.setText(display_text or "Location not selected")
+            row = self._w(f"{key}_info_row")
+            if row is not None:
+                row.setVisible(show_display)
+
     # ══════════════════════════════════════════════════════════════════════════
     # Utilities
     # ══════════════════════════════════════════════════════════════════════════
