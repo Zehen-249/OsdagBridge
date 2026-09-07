@@ -1,4 +1,5 @@
 import os, yaml
+from pathlib import Path
 from PySide6.QtWidgets import (
     QApplication, QWidget, QVBoxLayout, QHBoxLayout, QLabel,
     QMenuBar, QSplitter, QSizePolicy, QPushButton, QLineEdit, QComboBox, QFileDialog,
@@ -6,6 +7,11 @@ from PySide6.QtWidgets import (
 from PySide6.QtSvgWidgets import QSvgWidget
 from PySide6.QtCore import Qt, QFile, QTextStream, Signal, QTimer, QObject, QEvent, QThread
 from PySide6.QtGui import QIcon, QAction, QKeySequence
+
+from osdagbridge.core.utils.project_db import (
+    init_project_db, get_project_by_id,
+    PROJECT_NAME, PROJECT_PATH, MODULE_KEY,
+)
 
 from osdagbridge.desktop.ui.docks.input_dock import InputDock
 from osdagbridge.desktop.ui.docks.output_dock import OutputDock
@@ -119,6 +125,11 @@ class CustomWindow(QWidget):
         # Source for all input values.
         # Initialised from BASIC_INPUT_DICT; updated live as the user edits fields.
         self.input_dict = dict(BASIC_INPUT_DICT)
+
+        # Save Project state — save_state is False until the first successful save, project_id is the DB row id of the most recent save so the next save can offer Overwrite / Save as New.
+        self.save_state = False
+        self.project_id: int | None = None
+        init_project_db()
 
         # AdditionalInputs dialog 
         self._additional_inputs_dialog: AdditionalInputs | None = None
@@ -844,6 +855,131 @@ class CustomWindow(QWidget):
                 text=f"OSI file not saved:\n{e}",
                 dialogType=MessageBoxType.Warning
             ).exec()
+
+    # Save as a project: tracks the project in ~/.osdagbridge/osdagbridge.db so the next save can offer Overwrite / Save as New.
+    def saveDesign(self):
+        design_state = getattr(self.backend, "design_status", False)
+        filePath = None
+        fileName = None
+        record = None
+        if not design_state:
+            result = CustomMessageBox(
+                title="Save Options",
+                text="To Save As Project Perform Design First.",
+                buttons=["Save OSI Only", "Cancel"],
+                dialogType=MessageBoxType.Information,
+            ).exec()
+
+            if result == "Save OSI Only":
+                self.saveOSI_inputs()
+                return
+            if result == "Cancel":
+                return
+
+        elif not self.save_state:
+            default_dir = os.path.join(get_documents_folder(), "Project.osi")
+            filePath, _ = QFileDialog.getSaveFileName(
+                self,
+                "Save Design as Project",
+                default_dir,
+                "Project Files(*.osi)",
+                None,
+            )
+            if not filePath:
+                return
+            fileName = Path(filePath).stem
+            record = {
+                PROJECT_NAME: fileName,
+                PROJECT_PATH: filePath,
+                MODULE_KEY: self.backend.module_name(),
+            }
+            self.project_id = self.output_dock.save_to_database(record)
+
+        else:
+            existing = get_project_by_id(self.project_id)
+            if existing is None:
+                # Stale id (DB was cleared). Fall back to first-save flow.
+                self.save_state = False
+                self.project_id = None
+                return self.saveDesign()
+            filePath = existing.get(PROJECT_PATH)
+            fileName = existing.get(PROJECT_NAME)
+            # Carry the stored module_key forward so an Overwrite doesn't wipe
+            # the column (insert_recent_project refreshes MODULE_KEY on every
+            # UPSERT, even when the record dict omits the key).
+            record = {
+                PROJECT_NAME: fileName,
+                PROJECT_PATH: filePath,
+                MODULE_KEY: existing.get(MODULE_KEY) or self.backend.module_name(),
+            }
+
+            result = CustomMessageBox(
+                title="Save Options",
+                text=f"Do you want to Overwrite\nthe existing project '{fileName}.osi'?",
+                buttons=["Yes Overwrite", "Save as New", "Cancel"],
+                dialogType=MessageBoxType.Information,
+            ).exec()
+
+            if result == "Yes Overwrite":
+                # record is already populated above; the file write below
+                # will refresh last_edited via save_to_database.
+                pass
+
+            elif result == "Save as New":
+                default_dir = os.path.join(get_documents_folder(), "Project.osi")
+                filePath, _ = QFileDialog.getSaveFileName(
+                    self,
+                    "Save Design as Project",
+                    default_dir,
+                    "Project Files(*.osi)",
+                    None,
+                )
+                if not filePath:
+                    return
+                fileName = Path(filePath).stem
+                record = {
+                    PROJECT_NAME: fileName,
+                    PROJECT_PATH: filePath,
+                    MODULE_KEY: self.backend.module_name(),
+                }
+                self.project_id = self.output_dock.save_to_database(record)
+
+            elif result == "Cancel":
+                return
+
+        # If we got here without a filePath, something is wrong — bail safely.
+        if not filePath or not record:
+            return
+
+        # Make sure additional-input defaults land in the saved file even if
+        # the user never opened the Additional Inputs dialog (same trick as
+        # saveOSI_inputs above).
+        try:
+            solve_extend_basic_input_dict(self.input_dict)
+        except Exception:
+            pass
+
+        try:
+            with open(filePath, 'w') as input_file:
+                yaml.dump(self.input_dict, input_file)
+
+            self.save_state = True
+            # Refresh last_edited on the record we just wrote.
+            self.project_id = self.output_dock.save_to_database(record)
+
+            CustomMessageBox(
+                title="Success",
+                text="Saved OSI as Project Successfully!",
+                dialogType=MessageBoxType.Success
+            ).exec()
+
+        except Exception:
+            CustomMessageBox(
+                title="Unsaved File",
+                text="OSI file not saved.",
+                dialogType=MessageBoxType.Warning
+            ).exec()
+            return
 
     def loadOSI_inputs(self):
         filePath, _ = QFileDialog.getOpenFileName(
@@ -1769,10 +1905,10 @@ class CustomWindow(QWidget):
 
         file_menu.addSeparator()
 
-        save_input_action = QAction("Save Input", self)
-        save_input_action.setShortcut(QKeySequence("Ctrl+S"))
-        save_input_action.triggered.connect(lambda: self.common_design_func("Save"))
-        file_menu.addAction(save_input_action)
+        save_project_action = QAction("Save Project", self)
+        save_project_action.setShortcut(QKeySequence("Ctrl+S"))
+        save_project_action.triggered.connect(self.saveDesign)
+        file_menu.addAction(save_project_action)
 
         save_log_action = QAction("Save Log Messages", self)
         save_log_action.setShortcut(QKeySequence("Alt+M"))
