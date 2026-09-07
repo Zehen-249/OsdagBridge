@@ -109,7 +109,7 @@ class CustomMessageBox(QDialog):
     def setIconForType(self, dialogType):
         # Use Qt's standard icons (replace with custom paths if needed)
         icon_map = {
-            MessageBoxType.Information: ":/osdagbridge/vectors/msg_info.svg",
+            MessageBoxType.Information: ":/osdagbridge/vectors/msg_about.svg",
             MessageBoxType.Warning: ":/osdagbridge/vectors/msg_warning.svg",
             MessageBoxType.Success: ":/osdagbridge/vectors/msg_success.svg",
             MessageBoxType.Critical: ":/osdagbridge/vectors/msg_critical.svg",
