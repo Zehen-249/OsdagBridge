@@ -55,3 +55,7 @@ test:
 
 about:
   summary: "OsdagBridge - Steel bridge analysis and design"
+
+extra:
+  osdag:
+    plugin: true
