@@ -15,9 +15,10 @@ welcome_text: |
 
 channels:
   - conda-forge
+  - osdag-plugins
   - osdag
   - geompy
-  - zehen-249
+  - 
 
 specs:
   - python >=3.11,<3.13

@@ -51,7 +51,7 @@ jobs:
       with:
         miniconda-version: "latest"
         auto-update-conda: true
-        channels: conda-forge, osdag, zehen-249, geompy
+        channels: conda-forge, osdag, osdag-plugins, geompy
         channel-priority: flexible
     
     - name: Install conda-build and anaconda-client
@@ -199,13 +199,13 @@ jobs:
           ls -lh "dist/$SUBDIR"
 
           if ls dist/$SUBDIR/*.conda >/dev/null 2>&1; then
-            anaconda -t "$ANACONDA_TOKEN" upload \
+            anaconda -t "$ANACONDA_TOKEN" upload -u osdag-plugins \
               dist/$SUBDIR/*.conda \
               --force
           fi
 
           if ls dist/$SUBDIR/*.tar.bz2 >/dev/null 2>&1; then
-            anaconda -t "$ANACONDA_TOKEN" upload \
+            anaconda -t "$ANACONDA_TOKEN" upload -u osdag-plugins \
               dist/$SUBDIR/*.tar.bz2 \
               --force
           fi
@@ -223,7 +223,7 @@ jobs:
         MAX_ATTEMPTS=20
         ATTEMPT=1
 
-        until conda search zehen-249::osdagbridge=$VERSION; do
+        until conda search osdag-plugins::osdagbridge=$VERSION; do
           if [ $ATTEMPT -ge $MAX_ATTEMPTS ]; then
             echo "Package not indexed after 10 minutes"
             exit 1
@@ -286,7 +286,7 @@ jobs:
         with:
           miniconda-version: "latest"
           auto-update-conda: true
-          channels: conda-forge, osdag, zehen-249, geompy
+          channels: conda-forge, osdag, osdag-plugins, geompy
           channel-priority: false
 
       - name: Install conda-constructor 

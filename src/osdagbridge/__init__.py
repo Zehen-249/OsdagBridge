@@ -5,7 +5,7 @@ from osdagbridge.core.utils.common import KEY_MODULE_PLATE_GIRDER
 IS_OSDAG_PLUGIN = True
 
 META = {
-    "name": "OsdagBridge",
+    "name": "osdagbridge",
     "description": "A bridge module for Osdag",
     "authors": ["FOSSEE Team"],
     "version": "1.0.0",
@@ -18,5 +18,8 @@ META = {
     "icons":[
         str(files("osdag_gui").joinpath("resources", "vectors", "nav_icons", "group_design.svg")),
         str(files("osdag_gui").joinpath("resources", "vectors", "nav_icons", "group_design_dark.svg"))
-    ]
+    ],
+    "conda_channel": "osdag-plugins",
+    "extra_channel_deps": ["geompy", "osdag"],
+
 }
