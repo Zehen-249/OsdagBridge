@@ -18,7 +18,6 @@ channels:
   - osdag-plugins
   - osdag
   - geompy
-  - 
 
 specs:
   - python >=3.11,<3.13
