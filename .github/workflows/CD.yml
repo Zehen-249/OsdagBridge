@@ -52,17 +52,22 @@ jobs:
         miniconda-version: "latest"
         auto-update-conda: true
         channels: conda-forge, osdag, osdag-plugins, geompy
-        channel-priority: flexible
+        channel-priority: strict
         use-mamba: true
+        mamba-version: "*"
     
     - name: Install conda-build and anaconda-client
       
       run: |
         set -e  # Exit on any error
-        echo "Installing conda-build and anaconda-client..."
-        conda install conda-build anaconda-client -y
-        echo "[SUCCESS] Tools installed successfully"
+        echo "=== Conda diagnostics ==="
         conda --version
+        mamba --version
+        conda info
+        
+        echo "=== Installing build tools using Mamba ==="
+        mamba install -y conda-build anaconda-client
+        echo "[SUCCESS] Tools installed successfully"
         conda-build --version
     
     - name: Extract version from tag
@@ -291,17 +296,17 @@ jobs:
           miniconda-version: "latest"
           auto-update-conda: true
           channels: conda-forge, osdag, osdag-plugins, geompy
-          channel-priority: false
+          channel-priority: strict
           use-mamba: true
+          mamba-version: "*"
 
       - name: Install conda-constructor 
         
         run: |
           set -e  # Exit on any error
           echo "Installing conda-constructor..."
-          conda install constructor -y
+          mamba install constructor -y
           echo "[SUCCESS] Tools installed successfully"
-          conda --version
           constructor --version
 
       - name: refactor-nsis-template
