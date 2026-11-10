@@ -53,6 +53,7 @@ jobs:
         auto-update-conda: true
         channels: conda-forge, osdag, osdag-plugins, geompy
         channel-priority: flexible
+        conda-solver: libmamba
     
     - name: Install conda-build and anaconda-client
       
@@ -291,6 +292,7 @@ jobs:
           auto-update-conda: true
           channels: conda-forge, osdag, osdag-plugins, geompy
           channel-priority: false
+          conda-solver: libmamba
 
       - name: Install conda-constructor 
         
