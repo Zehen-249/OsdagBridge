@@ -8,7 +8,7 @@ META = {
     "name": "osdagbridge",
     "description": "A bridge module for Osdag",
     "authors": ["FOSSEE Team"],
-    "version": "1.0.0",
+    "version": "1.0.6",
     "plugin_class": "osdagbridge.plugin.osdagbridge_plugin:OsdagBridgePlugin",
     "module_tree":[
         (

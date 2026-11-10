@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://schemas.conda.org/constructor/v0/construct.schema.json
 
 name: OsdagBridge
-version: 1.0.0
+version: 1.0.6
 uninstall_name: ${NAME}
 
 installer_type: exe  # [win]

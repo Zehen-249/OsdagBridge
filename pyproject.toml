@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "osdagbridge"
-version = "1.0.0"
+version = "1.0.6"
 description = "OsdagBridge - Shared core for analysis and design of steel bridges (CLI, Desktop, Web)"
 readme = "README.md"
 license = { file = "LICENSE" }
